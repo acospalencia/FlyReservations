@@ -3,7 +3,7 @@
     public class Flight
     {
         public string FlightCode { get; set; }  // PK
-        public int AirportId { get; set; }      // Podrías eliminarlo si usas origen/destino
+        public int AirportId { get; set; }
         public int OriginAirportId { get; set; }
         public int DestinationAirportId { get; set; }
         public DateTime Date { get; set; }
