@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public string FlightId { get; set; }  // FlightCode como FK
+        public int FlightId { get; set; }  // FlightCode como FK
         public int SeatId { get; set; }
         public DateTime Date { get; set; }
         public string QrCode { get; set; }
