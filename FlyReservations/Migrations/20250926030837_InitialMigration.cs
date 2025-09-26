@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FlyReservations.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -77,7 +77,8 @@ namespace FlyReservations.Migrations
                 name: "Flights",
                 columns: table => new
                 {
-                    FlightCode = table.Column<string>(type: "text", nullable: false),
+                    FlightCode = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     AirportId = table.Column<int>(type: "integer", nullable: false),
                     OriginAirportId = table.Column<int>(type: "integer", nullable: false),
                     DestinationAirportId = table.Column<int>(type: "integer", nullable: false),
@@ -141,7 +142,7 @@ namespace FlyReservations.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<int>(type: "integer", nullable: false),
-                    FlightId = table.Column<string>(type: "text", nullable: false),
+                    FlightId = table.Column<int>(type: "integer", nullable: false),
                     SeatId = table.Column<int>(type: "integer", nullable: false),
                     Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     QrCode = table.Column<string>(type: "text", nullable: false),

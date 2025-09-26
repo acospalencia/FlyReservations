@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FlyReservations.Migrations
 {
     [DbContext(typeof(FlyReservationBD))]
-    [Migration("20250922192038_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250926030837_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,8 +65,11 @@ namespace FlyReservations.Migrations
 
             modelBuilder.Entity("FlyReservations.Models.Flight", b =>
                 {
-                    b.Property<string>("FlightCode")
-                        .HasColumnType("text");
+                    b.Property<int>("FlightCode")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("FlightCode"));
 
                     b.Property<int>("AirportId")
                         .HasColumnType("integer");
@@ -111,9 +114,8 @@ namespace FlyReservations.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("FlightId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("FlightId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("QrCode")
                         .IsRequired()

@@ -1,5 +1,5 @@
 ﻿using FlyReservations.Data;
-using FlyReservations.DTO;
+using FlyReservations.DTO.FlightDtos;
 using FlyReservations.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -41,7 +41,7 @@ namespace FlyReservations.Endpoints
 
                 var entity = new Flight
                 {
-                    FlightCode = Guid.NewGuid().ToString()[..8].ToUpper(), // Código generado automático
+                    // FlightCode lo asigna la BD (Identity)
                     AirportId = dto.AiportId,
                     OriginAirportId = dto.OriginAiportId,
                     DestinationAirportId = dto.DestinationAiportId,
@@ -72,7 +72,7 @@ namespace FlyReservations.Endpoints
             });
 
             // Obtener un vuelo por su código
-            group.MapGet("/{flightCode}", async (string flightCode, FlyReservationBD db) =>
+            group.MapGet("/{flightCode:int}", async (int flightCode, FlyReservationBD db) =>
             {
                 var flight = await db.Flights
                     .Include(f => f.Airplane)
@@ -86,7 +86,7 @@ namespace FlyReservations.Endpoints
             });
 
             // Modificar un vuelo
-            group.MapPut("/{flightCode}", async (string flightCode, ModificarFlightDto dto, FlyReservationBD db) =>
+            group.MapPut("/{flightCode:int}", async (int flightCode, ModificarFlightDto dto, FlyReservationBD db) =>
             {
                 var flight = await db.Flights.FindAsync(flightCode);
                 if (flight is null)

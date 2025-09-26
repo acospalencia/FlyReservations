@@ -1,8 +1,7 @@
-﻿namespace FlyReservations.DTO
+﻿namespace FlyReservations.DTO.ReservationDtos
 {
-    public record MostrarReservationDto
+    public record CreateReservationDto
         (
-        int Id,
         int UserId,
         int FlightId,
         int SeatId,
@@ -10,6 +9,12 @@
         string QrCode,
         string Status
 
+
+
         );
+    
+
+
+
     
 }

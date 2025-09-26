@@ -7,7 +7,7 @@ namespace FlyReservations.EndPoints
 {
     public static class SeatEndpoints
     {
-        public static void AddSeatEndpoints(this IEndpointRouteBuilder routes)
+        public static void Add(this IEndpointRouteBuilder routes)
         {
             var group = routes.MapGroup("/api/seats").WithTags("Seats");
 

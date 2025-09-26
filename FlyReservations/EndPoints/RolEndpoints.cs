@@ -7,7 +7,7 @@ namespace FlyReservations.EndPoints
 {
     public static class RolEndpoints
     {
-        public static void AddRolEndpoints(this IEndpointRouteBuilder routes)
+        public static void Add(this IEndpointRouteBuilder routes)
         {
             var group = routes.MapGroup("/api/roles").WithTags("Roles");
 

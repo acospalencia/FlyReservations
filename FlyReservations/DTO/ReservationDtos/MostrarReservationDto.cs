@@ -1,7 +1,8 @@
-﻿namespace FlyReservations.DTO
+﻿namespace FlyReservations.DTO.ReservationDtos
 {
-    public record UpdateReservationDto
+    public record MostrarReservationDto
         (
+        int Id,
         int UserId,
         int FlightId,
         int SeatId,
@@ -10,7 +11,5 @@
         string Status
 
         );
-    
-
     
 }

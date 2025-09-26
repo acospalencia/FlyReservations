@@ -62,8 +62,11 @@ namespace FlyReservations.Migrations
 
             modelBuilder.Entity("FlyReservations.Models.Flight", b =>
                 {
-                    b.Property<string>("FlightCode")
-                        .HasColumnType("text");
+                    b.Property<int>("FlightCode")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("FlightCode"));
 
                     b.Property<int>("AirportId")
                         .HasColumnType("integer");
@@ -108,9 +111,8 @@ namespace FlyReservations.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("FlightId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("FlightId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("QrCode")
                         .IsRequired()

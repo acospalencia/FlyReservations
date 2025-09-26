@@ -2,7 +2,7 @@
 {
     public class Flight
     {
-        public string FlightCode { get; set; }  // PK
+        public int FlightCode { get; set; }  // PK
         public int AirportId { get; set; }
         public int OriginAirportId { get; set; }
         public int DestinationAirportId { get; set; }
