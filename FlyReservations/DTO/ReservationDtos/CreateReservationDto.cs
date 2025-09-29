@@ -1,4 +1,4 @@
-﻿namespace FlyReservations.DTO
+﻿namespace FlyReservations.DTO.ReservationDtos
 {
     public record CreateReservationDto
         (

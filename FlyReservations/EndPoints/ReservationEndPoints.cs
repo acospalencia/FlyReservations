@@ -1,5 +1,4 @@
 ﻿using FlyReservations.Data;
-using FlyReservations.DTO;
 using FlyReservations.DTO.ReservationDtos;
 using FlyReservations.Models;
 using Microsoft.EntityFrameworkCore;

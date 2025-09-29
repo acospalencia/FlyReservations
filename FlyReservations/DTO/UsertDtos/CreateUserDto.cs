@@ -1,9 +1,8 @@
-﻿namespace FlyReservations.DTO
+﻿namespace FlyReservations.DTO.UsertDtos
 {
-    public record UpdateUserDto
+    public record CreateUserDto
     (
-        int Id,
-       string Name,
+        string Name,
         string LastName,
         string Email,
         string Phone,
