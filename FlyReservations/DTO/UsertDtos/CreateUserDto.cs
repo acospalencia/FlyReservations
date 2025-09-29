@@ -8,7 +8,7 @@
         string Phone,
         string Passport,
         string Password,
-        int RoleId 
+        int IdRol 
 
     );
 }

@@ -14,6 +14,7 @@ namespace FlyReservations.EndPoints
             RolEndpoints.Add(app);
             SeatEndpoints.Add(app);
             UserEndPoints.Add(app);
+            AuthEndpoints.AddAuthEndpoints(app);
         }
 
     }
