@@ -11,7 +11,6 @@ namespace FlyReservations.EndPoints
         {
             var group = routes.MapGroup("/api/usuarios").WithTags("Usuarios");
 
-            // 📌 POST - Crear usuario
             group.MapPost("/", async (FlyReservationBD db, CreateUserDto dto) =>
             {
                 var errores = new Dictionary<string, string[]>();
@@ -37,7 +36,8 @@ namespace FlyReservations.EndPoints
                     Email = dto.Email,
                     Phone = dto.Phone,
                     Passport = dto.Passport,
-                    Password = dto.Password
+                    PasswordHash = dto.Password,
+                    IdRol = 3
                 };
 
                 db.Users.Add(entity);
@@ -50,13 +50,12 @@ namespace FlyReservations.EndPoints
                     entity.Email,
                     entity.Phone,
                     entity.Passport,
-                    entity.Password
+                    entity.PasswordHash
                 );
 
                 return Results.Created($"/usuarios/{entity.Id}", dtoSalida);
             });
 
-            // 📌 GET - Obtener todos los usuarios
             group.MapGet("/", async (FlyReservationBD db) =>
             {
                 var consulta = await db.Users.ToListAsync();
@@ -68,7 +67,7 @@ namespace FlyReservations.EndPoints
                     u.Email,
                     u.Phone,
                     u.Passport,
-                    u.Password
+                    u.PasswordHash
                 ))
                 .OrderBy(u => u.Name)
                 .ToList();
@@ -76,7 +75,6 @@ namespace FlyReservations.EndPoints
                 return Results.Ok(usuarios);
             });
 
-            // 📌 GET - Obtener usuario por ID
             group.MapGet("/{id}", async (int id, FlyReservationBD db) =>
             {
                 var usuario = await db.Users
@@ -88,14 +86,13 @@ namespace FlyReservations.EndPoints
                         u.Email,
                         u.Phone,
                         u.Passport,
-                        u.Password
+                        u.PasswordHash
                     ))
                     .FirstOrDefaultAsync();
 
                 return Results.Ok(usuario);
             });
 
-            // 📌 PUT - Actualizar usuario
             group.MapPut("/{id}", async (int id, UpdateUserDto dto, FlyReservationBD db) =>
             {
                 var usuario = await db.Users.FindAsync(id);
@@ -107,12 +104,13 @@ namespace FlyReservations.EndPoints
                 usuario.Email = dto.Email;
                 usuario.Phone = dto.Phone;
                 usuario.Passport = dto.Passport;
-                usuario.Password = dto.Password;
+                usuario.PasswordHash = dto.Password;
 
                 await db.SaveChangesAsync();
 
                 return Results.NoContent();
             });
+
         }
     }
 }

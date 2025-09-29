@@ -1,7 +1,7 @@
 ﻿namespace FlyReservations.DTO.AvionDtos
 {
-    public class ModificarAvionDto
-    {
-        public int capacidad;
-    }
+    public record ModificarAvionDto
+    (
+         int capacidad
+    );
 }

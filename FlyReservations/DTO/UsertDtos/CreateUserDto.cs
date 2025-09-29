@@ -7,7 +7,8 @@
         string Email,
         string Phone,
         string Passport,
-        string Password
+        string Password,
+        int RoleId 
 
     );
 }
