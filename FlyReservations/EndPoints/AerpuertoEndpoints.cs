@@ -9,7 +9,7 @@ namespace FlyReservations.Endpoints
     {
         public static void Add(this IEndpointRouteBuilder routes)
         {
-            var group = routes.MapGroup("/api/aeropuertos").WithTags("Aeropuertos");
+            var group = routes.MapGroup("/api/aeropuertos").WithTags("Aeropuertos").RequireAuthorization();
 
             // Crear
             group.MapPost("/", async (FlyReservationBD db, CrearAeropuertoDto dto) =>

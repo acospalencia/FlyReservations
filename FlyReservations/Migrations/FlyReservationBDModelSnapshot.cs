@@ -183,7 +183,7 @@ namespace FlyReservations.Migrations
                     b.ToTable("Seats");
                 });
 
-            modelBuilder.Entity("FlyReservations.Models.User", b =>
+            modelBuilder.Entity("User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -210,7 +210,7 @@ namespace FlyReservations.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -266,7 +266,7 @@ namespace FlyReservations.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("FlyReservations.Models.User", "User")
+                    b.HasOne("User", "User")
                         .WithMany("Reservations")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -290,7 +290,7 @@ namespace FlyReservations.Migrations
                     b.Navigation("Airplane");
                 });
 
-            modelBuilder.Entity("FlyReservations.Models.User", b =>
+            modelBuilder.Entity("User", b =>
                 {
                     b.HasOne("FlyReservations.Models.Rol", "Rol")
                         .WithMany("Users")
@@ -330,7 +330,7 @@ namespace FlyReservations.Migrations
                     b.Navigation("Reservations");
                 });
 
-            modelBuilder.Entity("FlyReservations.Models.User", b =>
+            modelBuilder.Entity("User", b =>
                 {
                     b.Navigation("Reservations");
                 });

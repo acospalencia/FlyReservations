@@ -9,7 +9,7 @@ namespace FlyReservations.Endpoints
     {
         public static void Add(this IEndpointRouteBuilder routes)
         {
-            var group = routes.MapGroup("/api/flights").WithTags("Flights");
+            var group = routes.MapGroup("/api/flights").WithTags("Flights").RequireAuthorization();
 
             // Crear nuevo vuelo
             group.MapPost("/", async (FlyReservationBD db, CrearFlightDto dto) =>
@@ -99,6 +99,26 @@ namespace FlyReservations.Endpoints
 
                 await db.SaveChangesAsync();
 
+                return Results.NoContent();
+            });
+
+            // Eliminar un vuelo
+            group.MapDelete("/{flightCode:int}", async (int flightCode, FlyReservationBD db) =>
+            {
+                var flight = await db.Flights
+                    .Include(f => f.Reservations)
+                    .FirstOrDefaultAsync(f => f.FlightCode == flightCode);
+                if (flight is null)
+                    return Results.NotFound();
+                if (flight.Reservations.Any())
+                {
+                    return Results.BadRequest(new
+                    {
+                        message = "No se puede eliminar el vuelo porque tiene reservas asociadas."
+                    });
+                }
+                db.Flights.Remove(flight);
+                await db.SaveChangesAsync();
                 return Results.NoContent();
             });
         }

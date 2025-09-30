@@ -9,7 +9,7 @@ namespace FlyReservations.EndPoints
     {
         public static void Add(this IEndpointRouteBuilder routes)
         {
-            var group = routes.MapGroup("/api/usuarios").WithTags("Usuarios");
+            var group = routes.MapGroup("/api/usuarios").WithTags("Usuarios").RequireAuthorization();
 
             group.MapPost("/", async (FlyReservationBD db, CreateUserDto dto) =>
             {
@@ -108,6 +108,16 @@ namespace FlyReservations.EndPoints
 
                 await db.SaveChangesAsync();
 
+                return Results.NoContent();
+            });
+
+            group.MapDelete("/{id}", async (int id, FlyReservationBD db) =>
+            {
+                var usuario = await db.Users.FindAsync(id);
+                if (usuario is null)
+                    return Results.NotFound();
+                db.Users.Remove(usuario);
+                await db.SaveChangesAsync();
                 return Results.NoContent();
             });
 
