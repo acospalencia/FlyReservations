@@ -122,6 +122,16 @@ namespace FlyReservations.EndPoints
 
                 return Results.NoContent();
             });
+
+            group.MapDelete("/{id}", async (int id, FlyReservationBD db) =>
+            {
+                var reservaciones = await db.Reservations.FindAsync(id);
+                if (reservaciones is null)
+                    return Results.NotFound();
+                db.Reservations.Remove(reservaciones);
+                await db.SaveChangesAsync();
+                return Results.NoContent();
+            });
         }
     }
 }

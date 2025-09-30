@@ -9,6 +9,7 @@ namespace FlyReservations.EndPoints
         IEndpointRouteBuilder routes)
         {
             var group = routes.MapGroup("/api/auth").WithTags("Auth");
+
             group.MapPost("/register", async (CreateUserDto dto, IAuthService
             authService) =>
             {
@@ -26,6 +27,7 @@ namespace FlyReservations.EndPoints
                     return Results.Conflict(new { message = ex.Message });
                 }
             });
+
             group.MapPost("/login", async (LoginDto dto, IAuthService
             authService) =>
             {
